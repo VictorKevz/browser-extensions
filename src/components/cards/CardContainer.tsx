@@ -1,14 +1,27 @@
-import { useState } from "react";
 import data from "../../data.json";
+import Card from "./Card";
+import { useCardContext } from "../../context/CardContext";
+import { tabButtons } from "../../types/card";
+import { useEffect } from "react";
 const CardContainer = () => {
-  const [active, setActive] = useState("all");
+  const { cardTab, setCardTab, cards, setCards } = useCardContext();
+
+  useEffect(() => {
+    if (cardTab === "all") {
+      setCards(data);
+    } else if (cardTab === "active") {
+      setCards(data.filter((item) => item.isActive));
+    } else {
+      setCards(data.filter((item) => !item.isActive));
+    }
+  }, [cardTab, setCards]);
   return (
     <section className="w-full mt-16">
       <header className="w-full flex flex-col items-center md:flex-row md:justify-between gap-4">
-        <h1 className="text-4xl">Extension List</h1>
+        <h1 className="text-4xl text-[var(--neutral-900)]">Extension List</h1>
         <ul className="flex items-center gap-3">
-          {statusButtons.map((item) => {
-            const isActive = active === item.id;
+          {tabButtons.map((item) => {
+            const isActive = cardTab === item.id;
             return (
               <li key={item.id}>
                 <button
@@ -18,7 +31,7 @@ const CardContainer = () => {
                       : "bg-[var(--neutral-0)] border border-[var(--neutral-200)] text-[var(--neutral-900)]"
                   }`}
                   type="button"
-                  onClick={() => setActive(item.id)}
+                  onClick={() => setCardTab(item.id)}
                 >
                   {item.text}
                 </button>
@@ -27,45 +40,19 @@ const CardContainer = () => {
           })}
         </ul>
       </header>
-      <div className="w-full grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 mt-8">
-        {data.map((card) => (
-          <article
-            key={card.name}
-            className="w-full bg-[var(--neutral-0)] border border-[var(--neutral-200)] p-5 shadow-lg rounded-[1.25rem]"
-          >
-            <header className="w-full flex items-start gap-4">
-              <figure>
-                <img
-                  src={card.logo}
-                  alt={`${card.name}'s Logo`}
-                  className="w-14 min-w-10 h-auto"
-                />
-              </figure>
-              <div className="flex flex-col items-start gap-1">
-                <h2 className="text-xl font-bold text-[var(--neutral-900)]">
-                  {card.name}
-                </h2>
-                <p className="text-base font-normal text-[var(--neutral-600)] tracking-tight">
-                  {card.description}
-                </p>
-              </div>
-            </header>
-            <footer className="w-full flex items-center justify-between">
-              <button type="button">Remove</button>
-              <button type="button">Toggle</button>
-            </footer>
-          </article>
-        ))}
+      <div className="w-full grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
+        {cards &&
+          cards.map((card) => (
+            <Card
+              key={card.name}
+              name={card.name}
+              logo={card.logo}
+              description={card.description}
+            />
+          ))}
       </div>
     </section>
   );
 };
 
 export default CardContainer;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const statusButtons = [
-  { id: "all", text: "All" },
-  { id: "active", text: "Active" },
-  { id: "inactive", text: "Inactive" },
-];

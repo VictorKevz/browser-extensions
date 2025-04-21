@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // src/context/ThemeContext.tsx
 
 import {
@@ -9,7 +10,6 @@ import {
 } from "react";
 import { Theme, ThemeContextType } from "../types/theme";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined
 );

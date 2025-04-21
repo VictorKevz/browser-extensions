@@ -26,6 +26,7 @@
   --neutral-0: hsl(226, 25%, 17%);
   --neutral-100: hsl(225, 23%, 24%);
   --neutral-200: hsl(226, 11%, 37%);
+  --neutral-300: hsl(226, 11%, 37%);
 
   --neutral-600: hsl(0, 0%, 78%);
   --neutral-900: hsl(200, 60%, 99%);
@@ -49,7 +50,6 @@ body {
 button,
 fieldset,
 input {
-  border: none;
   outline-color: var(--accent-purple);
   cursor: pointer;
 }

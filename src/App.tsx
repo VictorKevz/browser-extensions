@@ -1,18 +1,24 @@
 import "./App.css";
 import CardContainer from "./components/cards/CardContainer";
 import Header from "./components/header/Header";
+import { CardProvider } from "./context/CardContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
     <ThemeProvider>
       <main
-        className="w-full min-h-screen flex items-center justify-center gap-4 px-4"
-        style={{ backgroundImage: "var(--gradient)", backgroundRepeat: "no-repeat" }}
+        className="w-full min-h-screen flex items-start justify-center gap-4 px-4"
+        style={{
+          backgroundImage: "var(--gradient)",
+          backgroundRepeat: "no-repeat",
+        }}
       >
-        <div className="max-w-6xl w-full flex flex-col items-center my-10">
+        <div className="max-w-6xl xl:max-w-none w-full flex flex-col items-center my-10">
           <Header />
-          <CardContainer />
+          <CardProvider>
+            <CardContainer />
+          </CardProvider>
         </div>
       </main>
     </ThemeProvider>

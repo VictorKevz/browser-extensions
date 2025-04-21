@@ -7,8 +7,9 @@ import {
   ReactNode,
   useContext,
 } from "react";
-import { Theme, ThemeContextType } from "../types";
+import { Theme, ThemeContextType } from "../types/theme";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined
 );

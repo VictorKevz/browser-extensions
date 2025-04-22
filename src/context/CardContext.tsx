@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import data from "../data.json";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import {
   CardContextType,
   CardProviderProps,
@@ -27,15 +27,7 @@ export const CardProvider = ({ children }: CardProviderProps) => {
       )
     );
   };
-  useEffect(() => {
-    if (cardTab === "all") {
-      setCards(data);
-    } else if (cardTab === "active") {
-      setCards(data.filter((item) => item.isActive));
-    } else {
-      setCards(data.filter((item) => !item.isActive));
-    }
-  }, [cardTab, setCards]);
+
   return (
     <CardContext.Provider
       value={{

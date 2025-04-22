@@ -12,6 +12,7 @@ export interface CardContextType {
   setCardTab: (status: CardTab) => void;
   cards: CardType[];
   setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+  onToggle: (name: string) => void;
 }
 
 export interface CardProviderProps {
@@ -22,6 +23,7 @@ export type CardProps = {
   logo: string;
   name: string;
   description: string;
+  isActive: boolean;
 };
 
 type TabButton = {
@@ -34,3 +36,8 @@ export const tabButtons: TabButton[] = [
   { id: "active", text: "Active" },
   { id: "inactive", text: "Inactive" },
 ];
+
+export type ToggleCardButtonProps = {
+  name: string;
+  isActive: boolean;
+};

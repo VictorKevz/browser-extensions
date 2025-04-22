@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState } from "react";
+import data from "../data.json";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   CardContextType,
   CardProviderProps,
@@ -12,15 +13,38 @@ export const CardContext = createContext<CardContextType | undefined>(
 );
 
 export const CardProvider = ({ children }: CardProviderProps) => {
-  const [cards, setCards] = useState<CardType[]>([]);
+  const [cards, setCards] = useState<CardType[]>(data);
   const [cardTab, setCardTab] = useState<CardTab>("all");
 
   const updateCardTab = (status: CardTab) => {
     setCardTab(status);
   };
+
+  const toggleCardStatus = (name: string) => {
+    setCards((prev) =>
+      prev.map((card) =>
+        card.name === name ? { ...card, isActive: !card.isActive } : card
+      )
+    );
+  };
+  useEffect(() => {
+    if (cardTab === "all") {
+      setCards(data);
+    } else if (cardTab === "active") {
+      setCards(data.filter((item) => item.isActive));
+    } else {
+      setCards(data.filter((item) => !item.isActive));
+    }
+  }, [cardTab, setCards]);
   return (
     <CardContext.Provider
-      value={{ cardTab, setCardTab: updateCardTab, cards, setCards }}
+      value={{
+        cardTab,
+        setCardTab: updateCardTab,
+        cards,
+        setCards,
+        onToggle: toggleCardStatus,
+      }}
     >
       {children}
     </CardContext.Provider>

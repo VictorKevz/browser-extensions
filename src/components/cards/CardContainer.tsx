@@ -1,20 +1,18 @@
-import data from "../../data.json";
 import Card from "./Card";
 import { useCardContext } from "../../context/CardContext";
 import { tabButtons } from "../../types/card";
-import { useEffect } from "react";
-const CardContainer = () => {
-  const { cardTab, setCardTab, cards, setCards } = useCardContext();
+import { useMemo } from "react";
 
-  useEffect(() => {
-    if (cardTab === "all") {
-      setCards(data);
-    } else if (cardTab === "active") {
-      setCards(data.filter((item) => item.isActive));
-    } else {
-      setCards(data.filter((item) => !item.isActive));
-    }
-  }, [cardTab, setCards]);
+const CardContainer = () => {
+  const { cardTab, setCardTab, cards } = useCardContext();
+
+  const filteredData = useMemo(() => {
+    if (cardTab === "all") return cards;
+
+    return cards.filter((card) =>
+      cardTab === "active" ? card.isActive : !card.isActive
+    );
+  }, [cardTab, cards]);
   return (
     <section className="w-full mt-16">
       <header className="w-full flex flex-col items-center md:flex-row md:justify-between gap-4">
@@ -41,13 +39,14 @@ const CardContainer = () => {
         </ul>
       </header>
       <div className="w-full grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
-        {cards &&
-          cards.map((card) => (
+        {filteredData &&
+          filteredData.map((card) => (
             <Card
               key={card.name}
               name={card.name}
               logo={card.logo}
               description={card.description}
+              isActive={card.isActive}
             />
           ))}
       </div>

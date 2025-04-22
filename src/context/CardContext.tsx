@@ -15,7 +15,7 @@ export const CardContext = createContext<CardContextType | undefined>(
 export const CardProvider = ({ children }: CardProviderProps) => {
   const [cards, setCards] = useState<CardType[]>(data);
   const [cardTab, setCardTab] = useState<CardTab>("all");
-
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const updateCardTab = (status: CardTab) => {
     setCardTab(status);
   };
@@ -28,6 +28,14 @@ export const CardProvider = ({ children }: CardProviderProps) => {
     );
   };
 
+  const onDelete = (name: string) => {
+    setCards((prev) => prev.filter((card) => card.name != name));
+    setShowAlert(true);
+    const timeOutId = setTimeout(() => {
+      setShowAlert(false);
+    }, 3500);
+    return () => clearTimeout(timeOutId);
+  };
   return (
     <CardContext.Provider
       value={{
@@ -36,6 +44,8 @@ export const CardProvider = ({ children }: CardProviderProps) => {
         cards,
         setCards,
         onToggle: toggleCardStatus,
+        onDelete,
+        showAlert,
       }}
     >
       {children}

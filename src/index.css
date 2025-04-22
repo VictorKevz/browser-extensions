@@ -73,3 +73,6 @@ p {
 li {
   list-style: none;
 }
+button:focus {
+  outline: 1px solid var(--red-700);
+}

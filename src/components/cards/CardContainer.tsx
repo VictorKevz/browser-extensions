@@ -2,6 +2,7 @@ import Card from "./Card";
 import { useCardContext } from "../../context/CardContext";
 import { tabButtons } from "../../types/card";
 import { useMemo } from "react";
+import EmptyView from "../notifications/EmptyView";
 
 const CardContainer = () => {
   const { cardTab, setCardTab, cards } = useCardContext();
@@ -38,7 +39,7 @@ const CardContainer = () => {
           })}
         </ul>
       </header>
-      <div className="w-full grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
+      <div className="w-full grid grid-cols-1 gap-3 place-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
         {filteredData &&
           filteredData.map((card) => (
             <Card
@@ -49,6 +50,9 @@ const CardContainer = () => {
               isActive={card.isActive}
             />
           ))}
+      </div>
+      <div className="w-full flex items-center">
+        <EmptyView data={filteredData} />
       </div>
     </section>
   );

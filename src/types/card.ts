@@ -13,6 +13,8 @@ export interface CardContextType {
   cards: CardType[];
   setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
   onToggle: (name: string) => void;
+  onDelete: (name: string) => void;
+  showAlert: boolean;
 }
 
 export interface CardProviderProps {

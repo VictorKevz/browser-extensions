@@ -1,17 +1,19 @@
-import { useState } from "react";
 import { CardProps } from "../../types/card";
 import ToggleCardButton from "./ToggleCardButton";
-import WarningModal from "../notifications/WarningModal";
+import { motion } from "framer-motion";
+import { cardVariants } from "../../variants";
+import { useCardContext } from "../../context/CardContext";
+const Card = ({ name, description, logo, isActive, index }: CardProps) => {
+  const { toggleModal } = useCardContext();
 
-const Card = ({ name, description, logo, isActive }: CardProps) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const onClose = () => {
-    setShowModal(false);
-  };
   return (
-    <article
+    <motion.article
       className="w-full flex flex-col justify-between bg-[var(--neutral-0)] border border-[var(--neutral-200)] p-5 min-h-40 shadow-lg rounded-[1.25rem] cursor-pointer transition-all duration-300 ease-in-out hover:translate-y-[-2px]"
       aria-labelledby={`card-title-${name}`}
+      variants={cardVariants}
+      initial="initial"
+      animate="animate"
+      key={index}
     >
       <header className="w-full flex items-start gap-4">
         <figure>
@@ -40,17 +42,14 @@ const Card = ({ name, description, logo, isActive }: CardProps) => {
         <button
           type="button"
           className="h-10 rounded-full border border-[var(--neutral-300)] px-4 text-[var(--neutral-900)] hover:bg-[var(--neutral-300)]"
-          onClick={() => setShowModal(!showModal)}
+          onClick={() => toggleModal(name)}
           aria-label={`Remove ${name}`}
         >
           Remove
         </button>
         <ToggleCardButton name={name} isActive={isActive} />
       </footer>
-      <div className="w-full">
-        {showModal && <WarningModal onClose={onClose} name={name} />}
-      </div>
-    </article>
+    </motion.article>
   );
 };
 

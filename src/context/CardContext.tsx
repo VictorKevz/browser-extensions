@@ -16,10 +16,17 @@ export const CardProvider = ({ children }: CardProviderProps) => {
   const [cards, setCards] = useState<CardType[]>(data);
   const [cardTab, setCardTab] = useState<CardTab>("all");
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [currentCardName, setCurrentCardName] = useState<string>("");
+
   const updateCardTab = (status: CardTab) => {
     setCardTab(status);
   };
 
+  const toggleModal = (name: string) => {
+    setShowModal(!showModal);
+    setCurrentCardName(name);
+  };
   const toggleCardStatus = (name: string) => {
     setCards((prev) =>
       prev.map((card) =>
@@ -31,6 +38,7 @@ export const CardProvider = ({ children }: CardProviderProps) => {
   const onDelete = (name: string) => {
     setCards((prev) => prev.filter((card) => card.name != name));
     setShowAlert(true);
+    setShowModal(false);
     const timeOutId = setTimeout(() => {
       setShowAlert(false);
     }, 3500);
@@ -46,6 +54,9 @@ export const CardProvider = ({ children }: CardProviderProps) => {
         onToggle: toggleCardStatus,
         onDelete,
         showAlert,
+        toggleModal,
+        cardName: currentCardName,
+        showModal,
       }}
     >
       {children}

@@ -45,13 +45,14 @@ const CardContainer = () => {
       </header>
       <div className="w-full grid grid-cols-1 gap-3 place-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
         {filteredData &&
-          filteredData.map((card) => (
+          filteredData.map((card, index) => (
             <Card
               key={card.name}
               name={card.name}
               logo={card.logo}
               description={card.description}
               isActive={card.isActive}
+              index={index}
             />
           ))}
       </div>

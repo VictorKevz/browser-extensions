@@ -1,4 +1,4 @@
-import { DeleteForever } from "@mui/icons-material";
+import { Close, DeleteForever } from "@mui/icons-material";
 import { WarningModalprops } from "../../types/notifications";
 import { useCardContext } from "../../context/CardContext";
 import FocusTrap from "@mui/material/Unstable_TrapFocus";
@@ -13,9 +13,9 @@ const WarningModal = ({ onClose, name }: WarningModalprops) => {
           aria-modal="true"
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
-          className="max-w-lg w-full flex flex-col justify-between bg-[var(--neutral-0)] py-5 rounded-xl shadow-xl border border-[var(--neutral-200)] static m-0"
+          className="max-w-lg w-full flex flex-col justify-between bg-[var(--neutral-0)] py-5 rounded-xl shadow-xl border border-[var(--neutral-200)] relative m-0"
         >
-          <header className="flex items-start gap-3 w-full px-5">
+          <header className="flex items-start gap-3 w-full px-5 mt-8 sm:mt-6">
             <span className="min-w-11 min-h-11 bg-[var(--neutral-200)] rounded-lg flex items-center justify-center text-[var(--neutral-900)]">
               <DeleteForever aria-hidden="true" />
             </span>
@@ -38,7 +38,7 @@ const WarningModal = ({ onClose, name }: WarningModalprops) => {
           <footer className="w-full flex justify-end items-center mt-6 pt-3.5 px-5 gap-3 border-t border-[var(--neutral-300)]">
             <button
               type="button"
-              className="h-10 px-4 text-[var(--neutral-900)] rounded-full border border-[var(--neutral-300)] font-medium"
+              className="h-10 px-4 text-[var(--neutral-900)] rounded-full border border-[var(--neutral-300)] font-medium hover:bg-[var(--neutral-200)] hover:border-[var(--neutral-200)]"
               onClick={onClose}
               aria-label="Cancel deletion"
             >
@@ -48,11 +48,18 @@ const WarningModal = ({ onClose, name }: WarningModalprops) => {
               type="button"
               onClick={() => onDelete(name)}
               aria-label={`Confirm deletion of ${name}`}
-              className="h-10 px-4 rounded-full bg-[var(--red-700)] text-[var(--neutral-0)] font-medium"
+              className="h-10 px-4 rounded-full bg-[var(--red-700)] text-[var(--neutral-0)] font-medium border border-transparent hover:border-[var(--red-700)] hover:bg-inherit hover:text-[var(--neutral-900)]"
             >
               Delete
             </button>
           </footer>
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 w-8 h-8 rounded-full border border-[var(--neutral-200)] text-[var(--neutral-900)] hover:bg-[var(--neutral-200)]"
+          >
+            <Close fontSize="medium" />
+          </button>
         </dialog>
       </div>
     </FocusTrap>

@@ -60,6 +60,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease-in-out;
 }
 
 a {
@@ -75,4 +76,17 @@ li {
 }
 button:focus {
   outline: 1px solid var(--red-700);
+}
+button:hover {
+  transform: translateY(-1px) scale(1.08);
+}
+.sr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

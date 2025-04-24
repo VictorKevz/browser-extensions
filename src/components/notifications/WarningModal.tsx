@@ -56,6 +56,7 @@ const WarningModal = ({ onClose, name }: WarningModalprops) => {
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close dialogue"
             className="absolute right-4 top-4 w-8 h-8 rounded-full border border-[var(--neutral-200)] text-[var(--neutral-900)] hover:bg-[var(--neutral-200)]"
           >
             <Close fontSize="medium" />

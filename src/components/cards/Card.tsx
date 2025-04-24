@@ -48,9 +48,7 @@ const Card = ({ name, description, logo, isActive }: CardProps) => {
         <ToggleCardButton name={name} isActive={isActive} />
       </footer>
       <div className="w-full">
-        {showModal && (
-          <WarningModal onClose={onClose} name={name} aria-modal="true" />
-        )}
+        {showModal && <WarningModal onClose={onClose} name={name} />}
       </div>
     </article>
   );

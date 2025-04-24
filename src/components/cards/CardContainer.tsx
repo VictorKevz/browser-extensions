@@ -27,7 +27,7 @@ const CardContainer = () => {
                   className={`h-11 font-normal rounded-full px-5 ${
                     isActive
                       ? "bg-[var(--red-400)] text-[var(--neutral-0)]"
-                      : "bg-[var(--neutral-0)] border border-[var(--neutral-200)] text-[var(--neutral-900)]"
+                      : "bg-[var(--neutral-0)] border border-[var(--neutral-200)] text-[var(--neutral-900)] hover:bg-[var(--red-400)] hover:text-[var(--neutral-0)]"
                   }`}
                   type="button"
                   onClick={() => setCardTab(item.id)}

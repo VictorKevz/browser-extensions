@@ -10,7 +10,7 @@ const Card = ({ name, description, logo, isActive }: CardProps) => {
   };
   return (
     <article
-      className="w-full flex flex-col justify-between bg-[var(--neutral-0)] border border-[var(--neutral-200)] p-5 min-h-40 shadow-lg rounded-[1.25rem]"
+      className="w-full flex flex-col justify-between bg-[var(--neutral-0)] border border-[var(--neutral-200)] p-5 min-h-40 shadow-lg rounded-[1.25rem] cursor-pointer transition-all duration-300 ease-in-out hover:translate-y-[-2px]"
       aria-labelledby={`card-title-${name}`}
     >
       <header className="w-full flex items-start gap-4">

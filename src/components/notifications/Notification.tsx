@@ -10,17 +10,13 @@ const Notification = () => {
     <AnimatePresence>
       {showAlert && (
         <motion.div
-          className="max-w-xl w-full shadow-2xl"
+          className="max-w-xl w-full shadow-2xl z-999"
           variants={alertVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
-          <Alert
-            variant="outlined"
-            severity="success"
-            sx={{ color: "var(--neutral-900)" }}
-          >
+          <Alert variant="filled" severity="success">
             Deleted Successfully!
           </Alert>
         </motion.div>

@@ -29,7 +29,7 @@ export const alertVariants = {
     transition: {
       type: "spring",
       damping: 15,
-      stiffnes: 300,
+      stiffness: 200,
       bounce: 0.5,
     },
   },
@@ -39,7 +39,7 @@ export const alertVariants = {
     transition: {
       type: "spring",
       damping: 15,
-      stiffnes: 300,
+      stiffness: 200,
       bounce: 0.5,
       duration: 0.5,
     },

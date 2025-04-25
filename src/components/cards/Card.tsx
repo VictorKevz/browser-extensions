@@ -1,19 +1,13 @@
 import { CardProps } from "../../types/card";
 import ToggleCardButton from "./ToggleCardButton";
-import { motion } from "framer-motion";
-import { cardVariants } from "../../variants";
 import { useCardContext } from "../../context/CardContext";
-const Card = ({ name, description, logo, isActive, index }: CardProps) => {
+const Card = ({ name, description, logo, isActive }: CardProps) => {
   const { toggleModal } = useCardContext();
 
   return (
-    <motion.article
+    <article
       className="w-full flex flex-col justify-between bg-[var(--neutral-0)] border border-[var(--neutral-200)] p-5 min-h-40 shadow-lg rounded-[1.25rem] cursor-pointer transition-all duration-300 ease-in-out hover:translate-y-[-2px]"
       aria-labelledby={`card-title-${name}`}
-      variants={cardVariants}
-      initial="initial"
-      animate="animate"
-      key={index}
     >
       <header className="w-full flex items-start gap-4">
         <figure>
@@ -49,7 +43,7 @@ const Card = ({ name, description, logo, isActive, index }: CardProps) => {
         </button>
         <ToggleCardButton name={name} isActive={isActive} />
       </footer>
-    </motion.article>
+    </article>
   );
 };
 

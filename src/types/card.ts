@@ -29,7 +29,6 @@ export type CardProps = {
   name: string;
   description: string;
   isActive: boolean;
-  index: number;
 };
 
 type TabButton = {

@@ -3,6 +3,8 @@ import { useCardContext } from "../../context/CardContext";
 import { tabButtons } from "../../types/card";
 import { useMemo } from "react";
 import EmptyView from "../notifications/EmptyView";
+import { motion } from "framer-motion";
+import { viewVariants } from "../../variants";
 
 const CardContainer = () => {
   const { cardTab, setCardTab, cards } = useCardContext();
@@ -43,19 +45,27 @@ const CardContainer = () => {
           })}
         </nav>
       </header>
-      <div className="w-full grid grid-cols-1 gap-3 place-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8">
+
+      <motion.div
+        variants={viewVariants(20)}
+        initial="hidden"
+        animate="visible"
+        key={cardTab}
+        exit="exit"
+        className="w-full grid grid-cols-1 gap-3 place-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8"
+      >
         {filteredData &&
-          filteredData.map((card, index) => (
+          filteredData.map((card) => (
             <Card
               key={card.name}
               name={card.name}
               logo={card.logo}
               description={card.description}
               isActive={card.isActive}
-              index={index}
             />
           ))}
-      </div>
+      </motion.div>
+
       <div className="w-full flex items-center">
         <EmptyView data={filteredData} />
       </div>

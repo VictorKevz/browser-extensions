@@ -1,21 +1,25 @@
 import { Close, DeleteForever } from "@mui/icons-material";
-// import { WarningModalprops } from "../../types/notifications";
 import { useCardContext } from "../../context/CardContext";
 import FocusTrap from "@mui/material/Unstable_TrapFocus";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { viewVariants } from "../../variants";
 
 const WarningModal = () => {
-  const { onDelete, toggleModal, cardName, showModal } = useCardContext();
+  const { onDelete, toggleModal, cardName } = useCardContext();
 
-  if (!showModal) return null;
+  //   if (!showModal) return null;
   return (
     <FocusTrap open>
       <div className="w-full min-h-screen fixed top-0 left-0 flex items-center justify-center z-100 bg-black/60 backdrop-blur-[2px] transition-all duration-300 ease-in-out px-4">
-        <div
+        <motion.dialog
           aria-modal="true"
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
           tabIndex={-1}
+          variants={viewVariants(30)}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           className="max-w-lg w-full flex flex-col justify-between bg-[var(--neutral-0)] py-5 rounded-xl shadow-xl border border-[var(--neutral-200)] relative m-0"
         >
           <header className="flex items-start gap-3 w-full px-5 mt-8 sm:mt-6">
@@ -65,7 +69,7 @@ const WarningModal = () => {
           >
             <Close fontSize="medium" aria-hidden="true" />
           </button>
-        </div>
+        </motion.dialog>
       </div>
     </FocusTrap>
   );

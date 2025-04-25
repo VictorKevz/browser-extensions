@@ -5,7 +5,7 @@ import { useTheme } from "../../context/ThemeContext";
 const Header = () => {
   const { theme } = useTheme();
   return (
-    <header className="w-full px-3 min-h-16 flex items-center justify-between bg-[var(--neutral-0)] rounded-lg shadow-lg">
+    <header className="w-full px-3 min-h-18 flex items-center justify-between bg-[var(--neutral-0)] rounded-lg shadow-lg ">
       <figure>
         <img
           src={theme === "light" ? lightLogo : darkLogo}

@@ -28,7 +28,7 @@ export const alertVariants = {
     opacity: 1,
     transition: {
       type: "spring",
-      damping: 15,
+      damping: 20,
       stiffness: 200,
       bounce: 0.5,
     },
@@ -38,7 +38,7 @@ export const alertVariants = {
     opacity: 0,
     transition: {
       type: "spring",
-      damping: 15,
+      damping: 20,
       stiffness: 200,
       bounce: 0.5,
       duration: 0.5,

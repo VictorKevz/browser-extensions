@@ -1,9 +1,10 @@
+import { AnimatePresence } from "framer-motion";
 import "./App.css";
 import CardContainer from "./components/cards/CardContainer";
 import Header from "./components/header/Header";
 import Notification from "./components/notifications/Notification";
 import WarningModal from "./components/notifications/WarningModal";
-import { CardProvider } from "./context/CardContext";
+import { CardProvider, useCardContext } from "./context/CardContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <div className="w-full fixed top-[7rem] flex justify-end z-9999 px-4">
             <Notification />
           </div>
-          <WarningModal />
+          <ModalWrapper />
         </main>
       </CardProvider>
     </ThemeProvider>
@@ -32,3 +33,12 @@ function App() {
 }
 
 export default App;
+
+function ModalWrapper() {
+  const { showModal, cardName } = useCardContext();
+  return (
+    <AnimatePresence mode="wait">
+      {showModal && <WarningModal key={cardName} />}
+    </AnimatePresence>
+  );
+}

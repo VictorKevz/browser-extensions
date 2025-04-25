@@ -16,6 +16,8 @@ const CardContainer = () => {
       cardTab === "active" ? card.isActive : !card.isActive
     );
   }, [cardTab, cards]);
+  const isEmpty = filteredData.length === 0;
+
   return (
     <section className="w-full mt-16">
       <header className="w-full flex flex-col items-center md:flex-row md:justify-between gap-4">
@@ -66,9 +68,7 @@ const CardContainer = () => {
           ))}
       </motion.div>
 
-      <div className="w-full flex items-center">
-        <EmptyView data={filteredData} />
-      </div>
+      <div className="w-full flex items-center">{isEmpty && <EmptyView />}</div>
     </section>
   );
 };
